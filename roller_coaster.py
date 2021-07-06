@@ -45,6 +45,6 @@ class RollerCoaster:
             car.start()
 
 
-rc = RollerCoaster(12, 2, 4, 1, 10, 3)
+rc = RollerCoaster(12, 1, 4, 1, 10, 3)
 
 rc.run()

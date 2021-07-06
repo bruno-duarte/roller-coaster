@@ -5,6 +5,8 @@ import threading
 
 class Car(threading.Thread):
 
+    trips = 0
+
     def __init__(self, id, C, passengers, Tm, mutex):
         self.id = id
         self.seats = Queue(C)
@@ -15,7 +17,6 @@ class Car(threading.Thread):
 
     def run(self):
         get_passenger = True
-        trips = 0
         left_the_queue = 0
         while True:
             if not self.passengers.empty():
@@ -35,16 +36,16 @@ class Car(threading.Thread):
                         print(f'Car {self.id} is running')
                         sleep(self.Tm)
                         print(f'Car {self.id} has fineshed running')
-                        trips += 1
+                        Car.trips += 1
                     while not self.seats.empty():
                         sleep(1)
                         passenger = self.seats.get()
                         self.seats.task_done()
                         print(f'Passenger {passenger.id} got off the car')
                     get_passenger = True
-            elif trips == 2:
+            elif Car.trips == 2:
                 with self.mutex:
-                    trips += 1
+                    Car.trips += 1
                     print(f'Car {self.id} is running')
                     sleep(self.Tm)
                     print(f'Car {self.id} has fineshed running')
@@ -57,5 +58,5 @@ class Car(threading.Thread):
                     else:
                         get_passenger = True
                         break
-            elif trips > 2:
+            elif Car.trips > 2:
                 break
