@@ -1,0 +1,9 @@
+__pycache__
+src/classes/__pycache__
+src/interfaces/__pycache__
+
+*.*~
+
+*.pyc
+
+.vscode

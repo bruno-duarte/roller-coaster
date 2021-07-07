@@ -1,11 +1,11 @@
 from queue import Queue
-from time import sleep
-from random import randint as rand
+from time import sleep as passenger_arrival
+from random import randint as arrival_time
 
 import threading
 
-from passenger import Passenger
-from car import Car
+from .passenger import Passenger
+from .car import Car
 
 mutex = threading.Lock()
 
@@ -23,19 +23,17 @@ class RollerCoaster:
         self.cars = []
 
         for id in range(self.m):
-            self.cars.append(Car(id + 1, self.C, self.queue, self.Tm, mutex))
+            self.cars.append(
+                Car(id + 1, self.C, self.queue, self.Tm, self.Te, mutex))
 
     def run(self):
-        threading.Thread(target=self.manage_passenger).start()
-        threading.Thread(target=self.manage_car).start()
-
-        # mp.join()
-        # mc.join()
+        mp_thread = threading.Thread(target=self.manage_passenger).start()
+        mc_thread = threading.Thread(target=self.manage_car).start()
 
     def manage_passenger(self):
         for id in range(self.n):
-            time = rand(1, 3)
-            sleep(time)
+            time = arrival_time(1, self.Tp)
+            passenger_arrival(time)
             passenger = Passenger(id + 1)
             print(f'Passenger {passenger.id} just arrived')
             self.queue.put(passenger)
@@ -43,8 +41,3 @@ class RollerCoaster:
     def manage_car(self):
         for car in self.cars:
             car.start()
-
-
-rc = RollerCoaster(12, 1, 4, 1, 10, 3)
-
-rc.run()
