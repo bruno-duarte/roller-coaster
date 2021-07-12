@@ -1,25 +1,33 @@
 from src.classes.roller_coaster import RollerCoaster
-from src.interfaces.menus import *
+from src.utils.menus import *
+from src.utils.messages import show_message, INVALID_OPTION
+from src.utils.constants import (
+    NONE,
+    ONE_CAR,
+    TWO_CARS,
+    THREE_CARS,
+    EXIT
+)
 
 
 def main():
-    choice = ''
-    while choice != '4':
+    choice = NONE
+    while choice != EXIT:
         choice = menu()
-        if choice == '1':
-            rc = RollerCoaster(12, 1, 4, 1, 10, 3)
+        if choice == ONE_CAR:
+            rc = RollerCoaster(52, 1, 4, 1, 10, 3)
             break
-        elif choice == '2':
-            rc = RollerCoaster(12, 2, 4, 1, 10, 3)
+        elif choice == TWO_CARS:
+            rc = RollerCoaster(92, 2, 4, 1, 10, 3)
             break
-        elif choice == '3':
-            rc = RollerCoaster(12, 3, 4, 1, 10, 3)
+        elif choice == THREE_CARS:
+            rc = RollerCoaster(148, 3, 4, 1, 10, 3)
             break
-        elif choice == '4':
+        elif choice == EXIT:
             break
         else:
-            print('Opção inválida!')
-    if choice != '4':
+            show_message(INVALID_OPTION)
+    if choice != EXIT:
         rc.run()
 
 

@@ -10,11 +10,3 @@ def menu():
     choice = input('>>> ')
     print('---------------------------------------')
     return choice
-
-
-def secondary_menu():
-    print('---------------------------------------')
-    choice = input('Do you want to run again [Y/n]? ')
-    print()
-    print('---------------------------------------')
-    return choice

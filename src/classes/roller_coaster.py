@@ -6,6 +6,10 @@ import threading
 
 from .passenger import Passenger
 from .car import Car
+from ..utils.messages import (
+    show_message,
+    PASSENGER_ARRIVAL
+)
 
 mutex = threading.Lock()
 
@@ -24,18 +28,18 @@ class RollerCoaster:
 
         for id in range(self.m):
             self.cars.append(
-                Car(id + 1, self.C, self.queue, self.Tm, self.Te, mutex))
+                Car(id + 1, self.C, self.queue, self.Tm, self.Te, self.m, mutex))
 
     def run(self):
-        mp_thread = threading.Thread(target=self.manage_passenger).start()
-        mc_thread = threading.Thread(target=self.manage_car).start()
+        threading.Thread(target=self.manage_passenger).start()
+        threading.Thread(target=self.manage_car).start()
 
     def manage_passenger(self):
         for id in range(self.n):
             time = arrival_time(1, self.Tp)
             passenger_arrival(time)
             passenger = Passenger(id + 1)
-            print(f'Passenger {passenger.id} just arrived')
+            show_message(PASSENGER_ARRIVAL, passenger.id)
             self.queue.put(passenger)
 
     def manage_car(self):
