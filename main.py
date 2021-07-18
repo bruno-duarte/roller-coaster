@@ -1,5 +1,6 @@
 from src.classes.roller_coaster import RollerCoaster
 from src.utils.menus import *
+import src.utils.globals as globals
 from src.utils.messages import show_message, INVALID_OPTION
 from src.utils.constants import (
     NONE,
@@ -32,4 +33,5 @@ def main():
 
 
 if __name__ == '__main__':
+    globals.initialize()
     main()
