@@ -1,0 +1,5 @@
+ONE_CAR = '1'
+TWO_CARS = '2'
+THREE_CARS = '3'
+EXIT = '4'
+NONE = ''
