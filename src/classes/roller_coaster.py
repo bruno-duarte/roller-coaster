@@ -9,7 +9,6 @@ from .passenger import Passenger
 from .car import Car
 import src.utils.globals as globals
 from ..utils.messages import (
-    FINISH_TIME,
     show_message,
     PASSENGER_ARRIVAL
 )
@@ -29,12 +28,12 @@ class RollerCoaster:
 
     def run(self):
         globals.start_time = time.perf_counter()
-        mp_threading = threading.Thread(target=self.create_passengers)
-        mc_threading = threading.Thread(target=self.create_cars)
-        mp_threading.start()
-        mc_threading.start()
-        mp_threading.join()
-        mc_threading.join()
+        cp_threading = threading.Thread(target=self.create_passengers)
+        cc_threading = threading.Thread(target=self.create_cars)
+        cp_threading.start()
+        cc_threading.start()
+        cp_threading.join()
+        cc_threading.join()
 
     def create_passengers(self):
         for id in range(self.n):
