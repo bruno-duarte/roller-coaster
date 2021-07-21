@@ -28,6 +28,7 @@ class RollerCoaster:
 
     def run(self):
         globals.start_time = time.perf_counter()
+        globals.amount_of_cars = self.m
         cp_threading = threading.Thread(target=self.create_passengers)
         cc_threading = threading.Thread(target=self.create_cars)
         cp_threading.start()

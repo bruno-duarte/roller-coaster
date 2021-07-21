@@ -71,6 +71,7 @@ class Car(threading.Thread):
             globals.running_finish_time = time.perf_counter()
 
     def move(self):
+        globals.cars_time[self.id] += 1
         self.is_running = True
         show_message(CAR_IS_RUNNING, self.id)
         sleep(self.Tm)
